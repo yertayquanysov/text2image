@@ -11,6 +11,7 @@ abstract class FileRepository {
 class FileRepositoryImpl implements FileRepository {
   @override
   void saveToGallery(TextPaint painter) async {
+
     var res = await painter.getImage();
     var image = await res.toByteData(format: ImageByteFormat.png);
 

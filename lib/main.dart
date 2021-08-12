@@ -21,7 +21,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   final _painter = TextPaint();
   final _fileRepository = FileRepositoryImpl();
 
@@ -36,8 +35,8 @@ class _HomePageState extends State<HomePage> {
         child: CustomPaint(
           painter: _painter,
           child: Container(
-            width: 300,
-            height: 300,
+            width: 1080,
+            height: 1080,
           ),
         ),
       ),
