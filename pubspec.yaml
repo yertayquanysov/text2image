@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   image_gallery_saver: '^1.5.0'
-  google_fonts: ^1.1.2
+  google_fonts: ^2.1.0
   permission_handler: ^5.1.0+2
 
 dev_dependencies:
