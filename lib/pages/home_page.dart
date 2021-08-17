@@ -1,11 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:insta_post_maker/services/file_service.dart';
 import 'package:insta_post_maker/widgets/post_item.dart';
-
-import '../services/file_service.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:screenshot/screenshot.dart';
 
 class HomePage extends StatelessWidget {
-  final _fileRepository = FileRepositoryImpl();
+  final ScreenshotController _screenshotController = ScreenshotController();
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +16,24 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Insta Post Maker"),
       ),
-      body: PostTemplate(
-        text:
-            "This handy package can be used to capture any Widget including full screen screenshots & individual widgets like",
+      body: Screenshot(
+        controller: _screenshotController,
+        child: PostTemplate(
+          text:
+              "This handy package can be used to capture any Widget including full screen screenshots & individual widgets like",
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () => _fileRepository.saveToGallery(),
+        onPressed: () async {
+          final response = await _screenshotController.capture();
+
+          final fileService = FileRepositoryImpl();
+
+          fileService.saveToGallery(response!);
+
+          print(response);
+        },
       ),
     );
   }

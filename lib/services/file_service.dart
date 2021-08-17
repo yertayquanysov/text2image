@@ -1,19 +1,22 @@
+import 'dart:typed_data';
+
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 abstract class FileRepository {
-  void saveToGallery();
+  void saveToGallery(Uint8List data);
 }
 
 class FileRepositoryImpl implements FileRepository {
   @override
-  void saveToGallery() async {
-    /*var image = await res.toByteData(format: ImageByteFormat.png);
-
+  void saveToGallery(Uint8List data) async {
     final PermissionStatus status = await Permission.storage.request();
 
     if (status.isGranted) {
       ImageGallerySaver.saveImage(
-        image!.buffer.asUint8List(image.offsetInBytes, image.lengthInBytes),
+        data,
         name: "app",
       );
-    }*/
+    }
   }
 }
