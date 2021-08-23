@@ -18,11 +18,12 @@ dependencies:
   path_provider: 2.0.2
   get: 4.3.8
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   lorem_ipsum: ^0.0.1
-
+  flutter_launcher_icons: ^0.9.2
 
 flutter:
   uses-material-design: true
