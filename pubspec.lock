@@ -81,6 +81,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  get:
+    dependency: "direct main"
+    description:
+      name: get
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.3.8"
   google_fonts:
     dependency: "direct main"
     description:
@@ -108,7 +115,14 @@ packages:
       name: image_gallery_saver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.6.9"
+    version: "1.5.0"
+  lorem_ipsum:
+    dependency: "direct dev"
+    description:
+      name: lorem_ipsum
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   matcher:
     dependency: transitive
     description:

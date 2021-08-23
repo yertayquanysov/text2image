@@ -13,10 +13,7 @@ class FileRepositoryImpl implements FileRepository {
     final PermissionStatus status = await Permission.storage.request();
 
     if (status.isGranted) {
-      ImageGallerySaver.saveImage(
-        data,
-        name: "app",
-      );
+      ImageGallerySaver.saveImage(data, name: "app");
     }
   }
 }

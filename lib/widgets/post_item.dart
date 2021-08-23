@@ -12,14 +12,16 @@ class PostTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
-      height: 300,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.all(28),
-      margin: const EdgeInsets.all(20),
-      color: Colors.black12,
+      color: Colors.greenAccent,
       child: Text(
         text,
-        style: GoogleFonts.ubuntu(fontSize: 22),
+        style: GoogleFonts.ubuntu(
+          fontSize: 22,
+          color: Colors.black87,
+        ),
       ),
     );
   }

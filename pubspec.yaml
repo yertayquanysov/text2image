@@ -11,15 +11,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  image_gallery_saver: '^1.5.0'
-  google_fonts: ^2.1.0
-  permission_handler: ^5.1.0+2
-  screenshot: ^1.2.3
-  path_provider: ^2.0.2
+  image_gallery_saver: 1.5.0
+  google_fonts: 2.1.0
+  permission_handler: 5.1.0+2
+  screenshot: 1.2.3
+  path_provider: 2.0.2
+  get: 4.3.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  lorem_ipsum: ^0.0.1
 
 
 flutter:
