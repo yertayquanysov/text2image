@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:insta_post_maker/config.dart';
 import 'package:insta_post_maker/services/text_service.dart';
-import 'package:lorem_ipsum/lorem_ipsum.dart';
+import 'package:lorem_ipsum_nonrandom/lorem_ipsum_nonrandom.dart';
 
 void main() {
   final TextService _textService = TextServiceImpl();
@@ -17,11 +17,13 @@ void main() {
     expect(result3.length, 1);
   });
 
-  test("test get pages: 2 page", () {
-    final text = _textService.getPages(loremIpsum(words: 30));
+  test("test get pages: n page", () {
+    final text1 = _textService
+        .getPages(LoremIpsum.provideText(letters: limitTextPerPage + 100));
+    expect(text1.length, 2);
 
-    print(text);
-
-    expect(text.length, 2);
+    final text2 = _textService
+        .getPages(LoremIpsum.provideText(letters: limitTextPerPage * 3));
+    expect(text2.length, 3);
   });
 }

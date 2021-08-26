@@ -5,8 +5,6 @@ abstract class TextService {
 }
 
 class TextServiceImpl implements TextService {
-
-
   @override
   List<String> getPages(String text) {
     final pageCount = (text.length / limitTextPerPage).ceil();

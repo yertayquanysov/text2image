@@ -144,13 +144,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.0"
-  lorem_ipsum:
+  lorem_ipsum_nonrandom:
     dependency: "direct dev"
     description:
-      name: lorem_ipsum
+      name: lorem_ipsum_nonrandom
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.1"
+    version: "1.0.1"
   matcher:
     dependency: transitive
     description:

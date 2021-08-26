@@ -2,10 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:insta_post_maker/pages/post_page.dart';
-import 'package:insta_post_maker/services/file_service.dart';
-import 'package:insta_post_maker/widgets/post_item.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:screenshot/screenshot.dart';
+import 'package:lorem_ipsum_nonrandom/lorem_ipsum_nonrandom.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,6 +11,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String passedText = "";
+
+  final TextEditingController _editingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +28,7 @@ class _HomePageState extends State<HomePage> {
               minLines: 3,
               maxLines: 30,
               onChanged: (text) => passedText = text,
+              controller: _editingController,
               decoration: InputDecoration(
                 hintText: "Текстті енгіз",
               ),
@@ -36,7 +36,13 @@ class _HomePageState extends State<HomePage> {
             MaterialButton(
               child: const Text("Пост жасау"),
               color: Colors.greenAccent,
-              onPressed: () => Get.to(PostPage(passedText)),
+              onPressed: () => Get.to(PostPage(_editingController.text)),
+            ),
+            MaterialButton(
+              child: const Text("Generate text"),
+              color: Colors.greenAccent,
+              onPressed: () => _editingController.text =
+                  LoremIpsum.provideText(letters: 1000),
             ),
           ],
         ),

@@ -22,7 +22,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  lorem_ipsum: ^0.0.1
+  lorem_ipsum_nonrandom: ^1.0.1
   flutter_launcher_icons: ^0.9.2
 
 flutter:
