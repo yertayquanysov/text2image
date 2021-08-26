@@ -1,1 +1,1 @@
-const int limitTextPerPage = 321;
+const int limitTextPerPage = 400;
