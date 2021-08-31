@@ -16,7 +16,7 @@ class PostTemplate extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.all(28),
-      color: Colors.black12.withAlpha(10),
+      color: Colors.white,
       child: AutoSizeText(
         text,
         minFontSize: 18,

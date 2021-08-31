@@ -1,0 +1,4 @@
+flutter_native_splash:
+  path: ../
+  color: "#42a5f5"
+  android: true
