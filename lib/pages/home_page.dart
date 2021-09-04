@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:insta_post_maker/pages/post_page.dart';
@@ -38,11 +39,14 @@ class _HomePageState extends State<HomePage> {
               color: Colors.greenAccent,
               onPressed: () => Get.to(PostPage(_editingController.text)),
             ),
-            MaterialButton(
-              child: const Text("Generate text"),
-              color: Colors.greenAccent,
-              onPressed: () => _editingController.text =
-                  LoremIpsum.provideText(letters: 1000),
+            Visibility(
+              visible: !kReleaseMode,
+              child: MaterialButton(
+                child: const Text("Generate text"),
+                color: Colors.greenAccent,
+                onPressed: () => _editingController.text =
+                    LoremIpsum.provideText(letters: 1000),
+              ),
             ),
           ],
         ),
