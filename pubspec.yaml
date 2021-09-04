@@ -11,11 +11,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  image_gallery_saver: 1.5.0
+  image_gallery_saver: ^1.6.9
   google_fonts: 2.1.0
-  permission_handler: 5.1.0+2
+  permission_handler: ^8.1.4+2
   screenshot: 1.2.3
-  path_provider: 2.0.2
+  path_provider: ^2.0.3
   get: 4.3.8
   auto_size_text: ^2.1.0
   uuid: ^3.0.4

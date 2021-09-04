@@ -157,7 +157,7 @@ packages:
       name: image_gallery_saver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.0"
+    version: "1.6.9"
   lorem_ipsum_nonrandom:
     dependency: "direct dev"
     description:
@@ -192,7 +192,7 @@ packages:
       name: path_provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.0.3"
   path_provider_linux:
     dependency: transitive
     description:
@@ -234,14 +234,14 @@ packages:
       name: permission_handler
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.1.0+2"
+    version: "8.1.4+2"
   permission_handler_platform_interface:
     dependency: transitive
     description:
       name: permission_handler_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "3.6.1"
   petitparser:
     dependency: transitive
     description:
@@ -262,7 +262,7 @@ packages:
       name: plugin_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3"
+    version: "2.0.1"
   process:
     dependency: transitive
     description:

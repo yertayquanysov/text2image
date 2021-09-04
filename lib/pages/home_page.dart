@@ -11,6 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   String passedText = "";
 
   final TextEditingController _editingController = TextEditingController();
@@ -19,11 +20,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Insta Content"),
+        title: const Text("ПостМакер"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(18.0),
-        child: Column(
+        child: ListView(
           children: [
             TextField(
               minLines: 3,
