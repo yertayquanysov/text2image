@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:insta_post_maker/services/file_service.dart';
 import 'package:insta_post_maker/services/text_service.dart';
 import 'package:insta_post_maker/widgets/post_item.dart';
@@ -50,12 +51,17 @@ class PostPage extends StatelessWidget {
       await Future.forEach(controllers, (ScreenshotController sc) async {
         final response = await sc.capture(pixelRatio: 3);
 
-        print(response);
-
         if (response != null) {
           fileRepo.saveToGallery(response);
         }
       });
+
+      Get.showSnackbar(GetBar(
+        message: "Сақталды",
+        duration: Duration(
+          seconds: 2,
+        ),
+      ));
     }
   }
 }
