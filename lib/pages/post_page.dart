@@ -38,7 +38,7 @@ class PostPage extends StatelessWidget {
           }
 
           if (state is PostSaved) {
-            showMessage("Посттар сақталды");
+            showMessage("Посттар сақталды. Галереядан қараңыз.");
           }
         },
         builder: (BuildContext context, Object? state) {
