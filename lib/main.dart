@@ -8,7 +8,6 @@ void main() {
     GetMaterialApp(
       home: HomePage(),
       theme: ThemeData(
-        accentColor: Colors.greenAccent,
         primaryColor: Colors.greenAccent,
         textTheme: GoogleFonts.ubuntuTextTheme(),
       ),

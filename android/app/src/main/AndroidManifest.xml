@@ -6,7 +6,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="insta_post_maker"
+        android:label="InstaPost"
         android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher">
         <activity

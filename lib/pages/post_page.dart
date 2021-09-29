@@ -1,11 +1,11 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:insta_post_maker/bloc/post_bloc.dart';
 import 'package:insta_post_maker/services/file_service.dart';
 import 'package:insta_post_maker/services/text_service.dart';
+import 'package:insta_post_maker/widgets/default_progress_bar.dart';
 import 'package:insta_post_maker/widgets/post_item.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 
@@ -16,25 +16,54 @@ class PostPage extends StatelessWidget {
   final List<ScreenshotController> controllers = [];
   final String passedText;
 
+  final FileRepository _fileRepository = FileRepositoryImpl();
+
+  late final PostSaveBloc _postSaveBloc;
+
   @override
   Widget build(BuildContext context) {
+    _postSaveBloc = PostSaveBloc(_fileRepository);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Посттар"),
       ),
-      body: ListView(
-        children: _textService.getPages(passedText).map((e) {
-          final controller = ScreenshotController();
-          controllers.add(controller);
+      body: BlocConsumer(
+        bloc: _postSaveBloc,
+        listener: (BuildContext context, state) {
 
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Screenshot(
-              controller: controller,
-              child: PostTemplate(text: e),
-            ),
+          if (state is PostSaveException) {
+            Get.showSnackbar(GetBar(
+              message: state.message,
+            ));
+          }
+
+          if (state is PostSaved) {
+            Get.showSnackbar(GetBar(
+              message: "Посттар сақталды",
+            ));
+          }
+        },
+        builder: (BuildContext context, Object? state) {
+          if (state is ProgressBar) {
+            return DefaultProgressBar();
+          }
+
+          return ListView(
+            children: _textService.getPages(passedText).map((e) {
+              final controller = ScreenshotController();
+              controllers.add(controller);
+
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Screenshot(
+                  controller: controller,
+                  child: PostTemplate(text: e),
+                ),
+              );
+            }).toList(),
           );
-        }).toList(),
+        },
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.save),
@@ -43,25 +72,5 @@ class PostPage extends StatelessWidget {
     );
   }
 
-  void saveImage() async {
-    final PermissionStatus status = await Permission.storage.request();
-    final FileRepository fileRepo = FileRepositoryImpl();
-
-    if (status.isGranted) {
-      await Future.forEach(controllers, (ScreenshotController sc) async {
-        final response = await sc.capture(pixelRatio: 3);
-
-        if (response != null) {
-          fileRepo.saveToGallery(response);
-        }
-      });
-
-      Get.showSnackbar(GetBar(
-        message: "Сақталды",
-        duration: Duration(
-          seconds: 2,
-        ),
-      ));
-    }
-  }
+  void saveImage() async {}
 }
