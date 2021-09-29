@@ -24,7 +24,10 @@ class PostSaveBloc extends Cubit<SaveState> {
 
   Future save(List<ScreenshotController> controllers) async {
     try {
+      emit(ProgressBar());
+
       final PermissionStatus status = await Permission.storage.request();
+
 
       if (status.isGranted) {
         await Future.forEach(
@@ -39,7 +42,11 @@ class PostSaveBloc extends Cubit<SaveState> {
         );
 
         emit(PostSaved());
+      }else{
+        emit(PostSaveException("Сақтауға рұқсат беріңіз"));
       }
+
+
     } catch (e) {
       emit(PostSaveException("Сақтау кезінде қателік!"));
     }

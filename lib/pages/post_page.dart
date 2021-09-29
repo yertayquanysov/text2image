@@ -9,6 +9,8 @@ import 'package:insta_post_maker/widgets/post_item.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 
+import '../extensions.dart';
+
 class PostPage extends StatelessWidget {
   PostPage(this.passedText);
 
@@ -31,17 +33,12 @@ class PostPage extends StatelessWidget {
       body: BlocConsumer(
         bloc: _postSaveBloc,
         listener: (BuildContext context, state) {
-
           if (state is PostSaveException) {
-            Get.showSnackbar(GetBar(
-              message: state.message,
-            ));
+            showMessage(state.message);
           }
 
           if (state is PostSaved) {
-            Get.showSnackbar(GetBar(
-              message: "Посттар сақталды",
-            ));
+            showMessage("Посттар сақталды");
           }
         },
         builder: (BuildContext context, Object? state) {
@@ -67,10 +64,8 @@ class PostPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.save),
-        onPressed: () => saveImage(),
+        onPressed: () => _postSaveBloc.save(controllers),
       ),
     );
   }
-
-  void saveImage() async {}
 }
