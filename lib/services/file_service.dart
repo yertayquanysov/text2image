@@ -1,17 +1,34 @@
 import 'dart:typed_data';
 
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:uuid/uuid.dart';
 
 abstract class FileRepository {
-  void saveToGallery(Uint8List data);
+  Future saveImages(List<ScreenshotController> controllers);
 }
 
 class FileRepositoryImpl implements FileRepository {
   @override
-  void saveToGallery(Uint8List data) async {
-    final fileName = Uuid().v4();
+  Future<void> saveImages(List<ScreenshotController> controllers) async {
+    await Future.forEach(
+      controllers,
+      (ScreenshotController sc) async {
+        final response = await sc.capture(pixelRatio: 3);
 
-    ImageGallerySaver.saveImage(data, name: fileName);
+        if (response != null) {
+          saveToGallery(response);
+        }
+      },
+    );
+  }
+
+  void saveToGallery(Uint8List data) async {
+    try {
+      final fileName = Uuid().v4();
+      ImageGallerySaver.saveImage(data, name: fileName);
+    } catch (e) {
+      print(e);
+    }
   }
 }

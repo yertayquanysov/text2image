@@ -26,29 +26,21 @@ class PostSaveBloc extends Cubit<SaveState> {
     try {
       emit(ProgressBar());
 
-      final PermissionStatus status = await Permission.storage.request();
+      await checkPermission();
+      await _fileRepository.saveImages(controllers);
 
-
-      if (status.isGranted) {
-        await Future.forEach(
-          controllers,
-          (ScreenshotController sc) async {
-            final response = await sc.capture(pixelRatio: 3);
-
-            if (response != null) {
-              _fileRepository.saveToGallery(response);
-            }
-          },
-        );
-
-        emit(PostSaved());
-      }else{
-        emit(PostSaveException("Сақтауға рұқсат беріңіз"));
-      }
-
-
+      emit(PostSaved());
     } catch (e) {
       emit(PostSaveException("Сақтау кезінде қателік!"));
+    }
+  }
+
+  Future checkPermission() async {
+    final PermissionStatus status = await Permission.storage.request();
+
+    if (!status.isGranted) {
+      emit(PostSaveException("Сақтауға рұқсат беріңіз"));
+      return;
     }
   }
 }

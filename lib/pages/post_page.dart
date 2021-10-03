@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:insta_post_maker/bloc/post_bloc.dart';
 import 'package:insta_post_maker/services/file_service.dart';
 import 'package:insta_post_maker/services/text_service.dart';
 import 'package:insta_post_maker/widgets/default_progress_bar.dart';
 import 'package:insta_post_maker/widgets/post_item.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 
 import '../extensions.dart';
 
 class PostPage extends StatelessWidget {
+
   PostPage(this.passedText);
 
   final TextService _textService = TextServiceImpl();
@@ -42,6 +41,7 @@ class PostPage extends StatelessWidget {
           }
         },
         builder: (BuildContext context, Object? state) {
+
           if (state is ProgressBar) {
             return DefaultProgressBar();
           }
