@@ -23,6 +23,7 @@ class PostPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     _postSaveBloc = PostSaveBloc(_fileRepository);
 
     return Scaffold(
