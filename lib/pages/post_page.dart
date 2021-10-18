@@ -16,8 +16,7 @@ class PostPage extends StatelessWidget {
   final List<ScreenshotController> controllers = [];
   final String passedText;
 
-  final FileRepository _fileRepository = FileRepositoryImpl();
-
+  final _fileRepository = FileRepositoryImpl();
   late final PostSaveBloc _postSaveBloc;
 
   @override
