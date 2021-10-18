@@ -10,7 +10,6 @@ import 'package:screenshot/screenshot.dart';
 import '../extensions.dart';
 
 class PostPage extends StatelessWidget {
-
   PostPage(this.passedText);
 
   final TextService _textService = TextServiceImpl();
@@ -23,7 +22,6 @@ class PostPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     _postSaveBloc = PostSaveBloc(_fileRepository);
 
     return Scaffold(
@@ -42,7 +40,6 @@ class PostPage extends StatelessWidget {
           }
         },
         builder: (BuildContext context, Object? state) {
-
           if (state is ProgressBar) {
             return DefaultProgressBar();
           }
