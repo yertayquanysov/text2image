@@ -9,20 +9,31 @@ import 'package:screenshot/screenshot.dart';
 
 import '../extensions.dart';
 
-class PostPage extends StatelessWidget {
+class PostPage extends StatefulWidget {
   PostPage(this.passedText);
 
-  final TextService _textService = TextServiceImpl();
-  final List<ScreenshotController> controllers = [];
   final String passedText;
 
+  @override
+  State<PostPage> createState() => _PostPageState();
+}
+
+class _PostPageState extends State<PostPage> {
+
+  final  _textService = TextServiceImpl();
+  final List<ScreenshotController> controllers = [];
   final _fileRepository = FileRepositoryImpl();
+
   late final PostSaveBloc _postSaveBloc;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     _postSaveBloc = PostSaveBloc(_fileRepository);
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Посттар"),
@@ -44,8 +55,9 @@ class PostPage extends StatelessWidget {
           }
 
           return ListView(
-            children: _textService.getPages(passedText).map((e) {
+            children: _textService.getPages(widget.passedText).map((e) {
               final controller = ScreenshotController();
+
               controllers.add(controller);
 
               return Padding(

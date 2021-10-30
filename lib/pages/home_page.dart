@@ -11,7 +11,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   String passedText = "";
 
   final TextEditingController _editingController = TextEditingController();
@@ -20,31 +19,37 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("ПостМакер"),
+        title: const Text("Пост Макер"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(18.0),
         child: ListView(
           children: [
             TextField(
-              minLines: 3,
+              minLines: 5,
               maxLines: 30,
               onChanged: (text) => passedText = text,
               controller: _editingController,
               decoration: InputDecoration(
                 hintText: "Текстті енгіз",
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(width: 1),
+                ),
               ),
             ),
-            MaterialButton(
+            TextButton(
               child: const Text("Пост жасау"),
-              color: Colors.greenAccent,
               onPressed: () => Get.to(PostPage(_editingController.text)),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(
+                  Colors.black12.withOpacity(0.03),
+                ),
+              ),
             ),
             Visibility(
               visible: !kReleaseMode,
-              child: MaterialButton(
+              child: TextButton(
                 child: const Text("Generate text"),
-                color: Colors.greenAccent,
                 onPressed: () => _editingController.text =
                     LoremIpsum.provideText(letters: 1000),
               ),
