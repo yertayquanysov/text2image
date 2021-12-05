@@ -9,10 +9,13 @@ class TextServiceImpl implements TextService {
   List<String> getPages(String text) {
     final pageCount = (text.length / limitTextPerPage).ceil();
 
-    return List.generate(pageCount, (idx) => getText(idx, text)).toList();
+    return List.generate(
+      pageCount,
+      (idx) => getTextExcerpt(idx, text),
+    ).toList();
   }
 
-  String getText(int idx, String text) {
+  String getTextExcerpt(int idx, String text) {
     if (text.length < limitTextPerPage) {
       return text;
     }

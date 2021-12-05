@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:insta_post_maker/services/file_service.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -22,12 +24,12 @@ class PostSaveBloc extends Cubit<SaveState> {
 
   PostSaveBloc(this._fileRepository) : super(PostResult());
 
-  Future save(List<ScreenshotController> controllers) async {
+  Future save(List<Uint8List> images) async {
     try {
       emit(ProgressBar());
 
       await checkPermission();
-      await _fileRepository.saveImages(controllers);
+      _fileRepository.saveImages(images);
 
       emit(PostSaved());
     } catch (e) {

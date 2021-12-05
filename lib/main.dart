@@ -11,7 +11,6 @@ void main() {
     GetMaterialApp(
       home: HomePage(),
       theme: ThemeData(
-        primaryColor: Colors.redAccent,
         textTheme: GoogleFonts.ubuntuTextTheme(),
       ),
     ),

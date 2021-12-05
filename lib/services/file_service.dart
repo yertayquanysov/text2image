@@ -1,34 +1,24 @@
 import 'dart:typed_data';
 
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:retry/retry.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:uuid/uuid.dart';
 
-import '../main.dart';
-
 abstract class FileRepository {
-  Future saveImages(List<ScreenshotController> controllers);
+  void saveImages(List<Uint8List> images);
 }
 
 class FileRepositoryImpl implements FileRepository {
   @override
-  Future<void> saveImages(List<ScreenshotController> controllers) async {
-    controllers.forEach((element) {
-      element.capture(pixelRatio: 3).then((Uint8List? data) {
-        if (data != null) {
-          saveToGallery(data);
-        }
-      });
-    });
-  }
+  void saveImages(List<Uint8List> images) {}
 
-  void saveToGallery(Uint8List data) async {
+  void saveToGallery(Uint8List? data) {
     try {
       final fileName = Uuid().v4();
-      final saved = await ImageGallerySaver.saveImage(data, name: fileName);
-      logger.i(saved);
+      ImageGallerySaver.saveImage(data!, name: fileName);
     } catch (e) {
-      logger.e(e);
+      print("Error save post");
     }
   }
 }

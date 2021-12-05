@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:insta_post_maker/bloc/post_bloc.dart';
@@ -19,22 +21,49 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPageState extends State<PostPage> {
-
-  final  _textService = TextServiceImpl();
-  final List<ScreenshotController> controllers = [];
+  final _textService = TextServiceImpl();
   final _fileRepository = FileRepositoryImpl();
+
+  List<Widget> posts = [];
+
+  final Queue<ScreenshotController> _screenshotControllers = Queue.from([]);
 
   late final PostSaveBloc _postSaveBloc;
 
   @override
   void initState() {
-    _postSaveBloc = PostSaveBloc(_fileRepository);
     super.initState();
+
+    _postSaveBloc = PostSaveBloc(_fileRepository);
+  }
+
+  generateWidgets() {
+    final textList = _textService.getPages(widget.passedText);
+
+    posts = textList.map((currentText) {
+      final ScreenshotController _screenshotController = ScreenshotController();
+      _screenshotControllers.add(_screenshotController);
+
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 10.0),
+        child: Screenshot(
+          controller: _screenshotController,
+          child: PostTemplate(
+            text: currentText,
+            isNotLastText: textList.last != currentText,
+          ),
+        ),
+      );
+    }).toList();
   }
 
   @override
   Widget build(BuildContext context) {
+
+    generateWidgets();
+
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("Посттар"),
       ),
@@ -55,25 +84,19 @@ class _PostPageState extends State<PostPage> {
           }
 
           return ListView(
-            children: _textService.getPages(widget.passedText).map((e) {
-              final controller = ScreenshotController();
-
-              controllers.add(controller);
-
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Screenshot(
-                  controller: controller,
-                  child: PostTemplate(text: e),
-                ),
-              );
-            }).toList(),
+            children: posts,
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.save),
-        onPressed: () => _postSaveBloc.save(controllers),
+        onPressed: () {
+          _screenshotControllers.forEach((sc) {
+            sc.capture(pixelRatio: 2).then((image) {
+              _fileRepository.saveToGallery(image);
+            });
+          });
+        },
       ),
     );
   }
