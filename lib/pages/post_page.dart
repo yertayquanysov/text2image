@@ -23,43 +23,22 @@ class PostPage extends StatefulWidget {
 class _PostPageState extends State<PostPage> {
   final _textService = TextServiceImpl();
   final _fileRepository = FileRepositoryImpl();
-
-  List<Widget> posts = [];
-
   final Queue<ScreenshotController> _screenshotControllers = Queue.from([]);
 
   late final PostSaveBloc _postSaveBloc;
+  List<Widget> posts = [];
 
   @override
   void initState() {
     super.initState();
 
     _postSaveBloc = PostSaveBloc(_fileRepository);
-  }
 
-  generateWidgets() {
-    final textList = _textService.getPages(widget.passedText);
-
-    posts = textList.map((currentText) {
-      final ScreenshotController _screenshotController = ScreenshotController();
-      _screenshotControllers.add(_screenshotController);
-
-      return Padding(
-        padding: const EdgeInsets.only(bottom: 10.0),
-        child: Screenshot(
-          controller: _screenshotController,
-          child: PostTemplate(
-            text: currentText,
-            isNotLastText: textList.last != currentText,
-          ),
-        ),
-      );
-    }).toList();
+    generateWidgets();
   }
 
   @override
   Widget build(BuildContext context) {
-
     generateWidgets();
 
     return Scaffold(
@@ -97,6 +76,29 @@ class _PostPageState extends State<PostPage> {
             });
           });
         },
+      ),
+    );
+  }
+
+  void generateWidgets() {
+    final textList = _textService.getPages(widget.passedText);
+    posts = textList
+        .map((text) => _postWidget(text, textList.last != text))
+        .toList();
+  }
+
+  Widget _postWidget(String text, bool isNotLastText) {
+    final ScreenshotController _screenshotController = ScreenshotController();
+    _screenshotControllers.add(_screenshotController);
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10.0),
+      child: Screenshot(
+        controller: _screenshotController,
+        child: PostTemplate(
+          text: text,
+          isNotLastText: isNotLastText,
+        ),
       ),
     );
   }
