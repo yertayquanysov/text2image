@@ -12,8 +12,8 @@ import 'package:screenshot/screenshot.dart';
 import '../extensions.dart';
 
 class PostPage extends StatefulWidget {
-  PostPage(this.passedText);
 
+  const PostPage(this.passedText);
   final String passedText;
 
   @override
@@ -21,12 +21,13 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPageState extends State<PostPage> {
+
   final _textService = TextServiceImpl();
   final _fileRepository = FileRepositoryImpl();
   final Queue<ScreenshotController> _screenshotControllers = Queue.from([]);
 
   late final PostSaveBloc _postSaveBloc;
-  List<Widget> posts = [];
+  List<Widget> _posts = [];
 
   @override
   void initState() {
@@ -39,6 +40,7 @@ class _PostPageState extends State<PostPage> {
 
   @override
   Widget build(BuildContext context) {
+
     generateWidgets();
 
     return Scaffold(
@@ -63,7 +65,7 @@ class _PostPageState extends State<PostPage> {
           }
 
           return ListView(
-            children: posts,
+            children: _posts,
           );
         },
       ),
@@ -71,7 +73,7 @@ class _PostPageState extends State<PostPage> {
         child: const Icon(Icons.save),
         onPressed: () {
           _screenshotControllers.forEach((sc) {
-            sc.capture(pixelRatio: 2).then((image) {
+            sc.capture(pixelRatio: 3).then((image) {
               _fileRepository.saveToGallery(image);
             });
           });
@@ -82,7 +84,7 @@ class _PostPageState extends State<PostPage> {
 
   void generateWidgets() {
     final textList = _textService.getPages(widget.passedText);
-    posts = textList
+    _posts = textList
         .map((text) => _postWidget(text, textList.last != text))
         .toList();
   }
