@@ -5,7 +5,7 @@ void showMessage(
   int seconds = 1,
 }) {
   Get.showSnackbar(
-    GetBar(
+    GetSnackBar(
       message: message,
       duration: Duration(seconds: seconds),
     ),
