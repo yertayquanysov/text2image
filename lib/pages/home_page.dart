@@ -11,8 +11,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _editingController = TextEditingController();
+
   String passedText = "";
-  final TextEditingController _editingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,19 +33,16 @@ class _HomePageState extends State<HomePage> {
               controller: _editingController,
               decoration: InputDecoration(
                 hintText: "Текстті енгіз",
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1),
-                ),
               ),
             ),
-            TextButton(
+            const SizedBox(
+              height: 20,
+            ),
+            MaterialButton(
               child: const Text("Пост жасау"),
               onPressed: () => Get.to(PostPage(_editingController.text)),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                  Colors.black12.withOpacity(0.03),
-                ),
-              ),
+              color: Colors.redAccent,
+              textColor: Colors.white,
             ),
             Visibility(
               visible: !kReleaseMode,
