@@ -28,7 +28,7 @@ class PostSaveBloc extends Cubit<SaveState> {
       emit(ProgressBar());
 
       await checkPermission();
-      _fileRepository.saveImages(images);
+      // TODO: _fileRepository.saveImages(images);
 
       emit(PostSaved());
     } catch (e) {

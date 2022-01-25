@@ -21,7 +21,6 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPageState extends State<PostPage> {
-
   final _textService = TextServiceImpl();
   final _fileRepository = FileRepositoryImpl();
   final Queue<ScreenshotController> _screenshotControllers = Queue.from([]);
@@ -40,9 +39,6 @@ class _PostPageState extends State<PostPage> {
 
   @override
   Widget build(BuildContext context) {
-
-    generateWidgets();
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -90,7 +86,6 @@ class _PostPageState extends State<PostPage> {
   }
 
   Widget _postWidget(String text, bool isNotLastText) {
-
     final _screenshotController = ScreenshotController();
     _screenshotControllers.add(_screenshotController);
 

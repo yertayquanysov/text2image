@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text("Пост Макер"),
       ),
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(18.0),
         child: ListView(
