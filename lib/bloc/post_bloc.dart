@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:insta_post_maker/services/file_service.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:screenshot/screenshot.dart';
 
 abstract class SaveState {}
 

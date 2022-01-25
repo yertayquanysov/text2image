@@ -12,7 +12,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String passedText = "";
-
   final TextEditingController _editingController = TextEditingController();
 
   @override
