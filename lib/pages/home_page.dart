@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:insta_post_maker/pages/post_page.dart';
 import 'package:lorem_ipsum_nonrandom/lorem_ipsum_nonrandom.dart';
 
+import '../bloc/post_bloc.dart';
+
 class HomePage extends StatelessWidget {
-  final _editingController = TextEditingController();
+  final _textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +24,20 @@ class HomePage extends StatelessWidget {
             TextField(
               minLines: 5,
               maxLines: 30,
-              controller: _editingController,
-              decoration: InputDecoration(
-                hintText: "Текстті енгіз",
-              ),
+              controller: _textController,
+              decoration: InputDecoration(hintText: "You text..."),
             ),
             const SizedBox(
               height: 20,
             ),
             MaterialButton(
-              child: const Text("Пост жасау"),
-              onPressed: () => Get.to(PostPage(_editingController.text)),
+              child: const Text("Create posts"),
+              onPressed: () {
+                Navigator.of(context).pushNamed("/post_page");
+                context
+                    .read<PostCreatorBloc>()
+                    .generatePosts(_textController.text);
+              },
               color: Colors.redAccent,
               textColor: Colors.white,
             ),
@@ -39,7 +45,7 @@ class HomePage extends StatelessWidget {
               visible: !kReleaseMode,
               child: TextButton(
                 child: const Text("Generate text"),
-                onPressed: () => _editingController.text =
+                onPressed: () => _textController.text =
                     LoremIpsum.provideText(letters: 1000),
               ),
             ),

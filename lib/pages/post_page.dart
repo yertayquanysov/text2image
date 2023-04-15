@@ -1,58 +1,28 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:insta_post_maker/bloc/post_bloc.dart';
-import 'package:insta_post_maker/services/file_service.dart';
-import 'package:insta_post_maker/services/text_service.dart';
+import 'package:insta_post_maker/bloc/post_creator_state.dart';
 import 'package:insta_post_maker/widgets/default_progress_bar.dart';
 import 'package:insta_post_maker/widgets/post_item.dart';
-import 'package:screenshot/screenshot.dart';
 
-import '../extensions.dart';
-
-class PostPage extends StatefulWidget {
-  const PostPage(this.passedText);
-
-  final String passedText;
-
-  @override
-  State<PostPage> createState() => _PostPageState();
-}
-
-class _PostPageState extends State<PostPage> {
-  final _textService = TextServiceImpl();
-  final _fileRepository = FileRepositoryImpl();
-  final Queue<ScreenshotController> _screenshotControllers = Queue.from([]);
-
-  late final PostSaveBloc _postSaveBloc;
-  List<Widget> _posts = [];
-
-  @override
-  void initState() {
-    super.initState();
-
-    _postSaveBloc = PostSaveBloc(_fileRepository);
-
-    generateWidgets();
-  }
-
+class PostViewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final postBloc = context.read<PostCreatorBloc>();
+
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Посттар"),
+        title: const Text("Created posts"),
       ),
       body: BlocConsumer(
-        bloc: _postSaveBloc,
+        bloc: postBloc,
         listener: (BuildContext context, state) {
-          if (state is PostSaveException) {
-            showMessage(state.message);
-          }
+          if (state is PostCreatorException) {}
 
-          if (state is PostSaved) {
-            showMessage("Посттар сақталды. Галереядан қараңыз.");
+          if (state is PostsSaved) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Saved")),
+            );
           }
         },
         builder: (BuildContext context, Object? state) {
@@ -60,43 +30,32 @@ class _PostPageState extends State<PostPage> {
             return DefaultProgressBar();
           }
 
-          return ListView(
-            children: _posts,
-          );
+          if (state is PostsCreated) {
+            final texts = state.textList;
+
+            return ListView(
+              children: texts
+                  .map((text) => _postWidget(text, texts.last != text))
+                  .toList(),
+            );
+          }
+
+          return LinearProgressIndicator();
         },
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.save),
-        onPressed: () {
-          _screenshotControllers.forEach((sc) {
-            sc.capture(pixelRatio: 1).then((image) {
-              _fileRepository.saveToGallery(image);
-            });
-          });
-        },
+        onPressed: () => postBloc.save(),
       ),
     );
   }
 
-  void generateWidgets() {
-    final textList = _textService.getPages(widget.passedText);
-    _posts = textList
-        .map((text) => _postWidget(text, textList.last != text))
-        .toList();
-  }
-
   Widget _postWidget(String text, bool isNotLastText) {
-    final _screenshotController = ScreenshotController();
-    _screenshotControllers.add(_screenshotController);
-
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0),
-      child: Screenshot(
-        controller: _screenshotController,
-        child: PostTemplate(
-          text: text,
-          isNotLastText: isNotLastText,
-        ),
+      child: PostTemplate(
+        text: text,
+        isNotLastText: isNotLastText,
       ),
     );
   }

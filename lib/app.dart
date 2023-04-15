@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:insta_post_maker/pages/home_page.dart';
+import 'package:insta_post_maker/pages/post_page.dart';
 
 class CreatorApp extends StatelessWidget {
   const CreatorApp({Key? key}) : super(key: key);
@@ -9,6 +10,9 @@ class CreatorApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: HomePage(),
+      routes: {
+        "/post_page": (_) => PostViewPage(),
+      },
       theme: ThemeData(
         textTheme: GoogleFonts.ubuntuTextTheme(),
         useMaterial3: true,
