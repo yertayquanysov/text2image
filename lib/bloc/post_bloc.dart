@@ -1,42 +1,27 @@
 import 'dart:typed_data';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:insta_post_maker/bloc/post_creator_state.dart';
+import 'package:insta_post_maker/main.dart';
 import 'package:insta_post_maker/services/file_service.dart';
-import 'package:permission_handler/permission_handler.dart';
 
-abstract class SaveState {}
-
-class PostSaved extends SaveState {}
-
-class PostResult extends SaveState {}
-
-class ProgressBar extends SaveState {}
-
-class PostSaveException extends SaveState {
-  final String message;
-
-  PostSaveException(this.message);
-}
-
-class PostSaveBloc extends Cubit<SaveState> {
+class PostCreatorBloc extends Cubit<PostCreatorState> {
   final FileRepository _fileRepository;
 
-  PostSaveBloc(this._fileRepository) : super(PostResult());
+  PostCreatorBloc(this._fileRepository) : super(ProgressBar());
 
   Future save(List<Uint8List> images) async {
     try {
       emit(ProgressBar());
 
       await checkPermission();
-      // TODO: _fileRepository.saveImages(images);
-
-      emit(PostSaved());
     } catch (e) {
-      emit(PostSaveException("Сақтау кезінде қателік!"));
+      emit(PostCreatorException());
     }
   }
 
   Future checkPermission() async {
+
     final PermissionStatus status = await Permission.storage.request();
 
     if (!status.isGranted) {

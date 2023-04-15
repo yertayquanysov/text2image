@@ -1,19 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:insta_post_maker/pages/post_page.dart';
 import 'package:lorem_ipsum_nonrandom/lorem_ipsum_nonrandom.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class HomePage extends StatelessWidget {
   final _editingController = TextEditingController();
-
-  String passedText = "";
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +21,6 @@ class _HomePageState extends State<HomePage> {
             TextField(
               minLines: 5,
               maxLines: 30,
-              onChanged: (text) => passedText = text,
               controller: _editingController,
               decoration: InputDecoration(
                 hintText: "Текстті енгіз",

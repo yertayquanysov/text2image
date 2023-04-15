@@ -69,7 +69,7 @@ class _PostPageState extends State<PostPage> {
         child: const Icon(Icons.save),
         onPressed: () {
           _screenshotControllers.forEach((sc) {
-            sc.capture(pixelRatio: 3).then((image) {
+            sc.capture(pixelRatio: 1).then((image) {
               _fileRepository.saveToGallery(image);
             });
           });

@@ -24,8 +24,8 @@ class PostTemplate extends StatelessWidget {
         children: [
           AutoSizeText(
             text,
-            minFontSize: 20,
-            maxFontSize: 22,
+            minFontSize: 18,
+            maxFontSize: 23,
             style: GoogleFonts.ubuntu(
               color: Colors.black87,
               height: 1.3,
