@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:insta_post_maker/pages/post_page.dart';
-import 'package:lorem_ipsum_nonrandom/lorem_ipsum_nonrandom.dart';
 
 import '../bloc/post_bloc.dart';
 
@@ -32,21 +30,20 @@ class HomePage extends StatelessWidget {
             ),
             MaterialButton(
               child: const Text("Create posts"),
+              color: Colors.redAccent,
+              textColor: Colors.white,
               onPressed: () {
                 Navigator.of(context).pushNamed("/post_page");
                 context
                     .read<PostCreatorBloc>()
                     .generatePosts(_textController.text);
               },
-              color: Colors.redAccent,
-              textColor: Colors.white,
             ),
             Visibility(
               visible: !kReleaseMode,
               child: TextButton(
                 child: const Text("Generate text"),
-                onPressed: () => _textController.text =
-                    LoremIpsum.provideText(letters: 1000),
+                onPressed: () => _textController.text = "",
               ),
             ),
           ],

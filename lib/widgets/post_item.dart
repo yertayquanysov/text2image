@@ -18,6 +18,8 @@ class PostTemplate extends StatelessWidget {
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.all(28),
+      width: double.infinity,
+      height: MediaQuery.of(context).size.width + 10,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -28,28 +30,27 @@ class PostTemplate extends StatelessWidget {
             maxFontSize: 23,
             style: GoogleFonts.ubuntu(
               color: Colors.black87,
-              height: 1.3,
+              height: 1.6,
             ),
           ),
-          const SizedBox(
-            height: 18,
-          ),
+          const SizedBox(height: 18),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                "@ertai.quanyshov",
+                "@ertai".toUpperCase(),
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              Expanded(child: SizedBox()),
               Visibility(
                 visible: isNotLastText,
                 child: Icon(
-                  FontAwesomeIcons.arrowCircleRight,
+                  FontAwesomeIcons.circleArrowRight,
                   size: 35,
-                  color: Colors.redAccent,
+                  color: Colors.greenAccent,
                 ),
               ),
             ],

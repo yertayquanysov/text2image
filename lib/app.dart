@@ -10,6 +10,7 @@ class CreatorApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: HomePage(),
+      debugShowCheckedModeBanner: false,
       routes: {
         "/post_page": (_) => PostViewPage(),
       },
