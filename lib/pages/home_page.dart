@@ -28,10 +28,9 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            MaterialButton(
+            CupertinoButton(
               child: const Text("Create posts"),
               color: Colors.redAccent,
-              textColor: Colors.white,
               onPressed: () {
                 Navigator.of(context).pushNamed("/post_page");
                 context
@@ -41,9 +40,10 @@ class HomePage extends StatelessWidget {
             ),
             Visibility(
               visible: !kReleaseMode,
-              child: TextButton(
+              child: CupertinoButton(
                 child: const Text("Generate text"),
-                onPressed: () => _textController.text = "",
+                onPressed: () => _textController.text =
+                    "oriwehgfawof awiefhawoef oierghseiohrg esrighoseirg oirgheorg",
               ),
             ),
           ],
