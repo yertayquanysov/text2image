@@ -3,9 +3,12 @@ abstract class TextService {
 }
 
 class TextServiceImpl implements TextService {
+
+  final limit = 330;
+
   @override
   List<String> getPages(String text) {
-    final pageCount = (text.length / 350).ceil();
+    final pageCount = (text.length / limit).ceil();
 
     return List.generate(
       pageCount,
@@ -14,10 +17,10 @@ class TextServiceImpl implements TextService {
   }
 
   String getTextExcerpt(int idx, String text) {
-    if (text.length < 350) {
+    if (text.length < limit) {
       return text;
     }
 
-    return text.substring(idx, 350);
+    return text.substring(idx, limit);
   }
 }
