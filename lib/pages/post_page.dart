@@ -5,6 +5,7 @@ import 'package:insta_post_maker/bloc/post_creator_state.dart';
 import 'package:insta_post_maker/widgets/post_item.dart';
 
 class PostViewPage extends StatelessWidget {
+
   List<Widget> _postWidgets = [];
 
   @override
@@ -42,7 +43,7 @@ class PostViewPage extends StatelessWidget {
                 .toList();
 
             return Wrap(
-              children:  _postWidgets,
+              children: _postWidgets,
             );
           }
 

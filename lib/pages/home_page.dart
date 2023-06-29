@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
               },
             ),
             Visibility(
-              visible: !kReleaseMode,
+              visible: kDebugMode,
               child: CupertinoButton(
                 child: const Text("Generate text"),
                 onPressed: () => _textController.text =
