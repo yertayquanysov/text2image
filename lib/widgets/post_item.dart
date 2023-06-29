@@ -17,7 +17,7 @@ class PostTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      padding: const EdgeInsets.all(28),
+      padding: const EdgeInsets.all(18),
       width: 300,
       height: 300,
       child: Column(

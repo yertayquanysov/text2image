@@ -3,8 +3,7 @@ abstract class TextService {
 }
 
 class TextServiceImpl implements TextService {
-
-  final limit = 330;
+  final limit = 400;
 
   @override
   List<String> getPages(String text) {
