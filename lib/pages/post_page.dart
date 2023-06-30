@@ -42,7 +42,7 @@ class PostViewPage extends StatelessWidget {
                 .map((text) => _postWidget(text, texts.last != text))
                 .toList();
 
-            return Wrap(
+            return ListView(
               children: _postWidgets,
             );
           }

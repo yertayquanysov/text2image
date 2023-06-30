@@ -18,43 +18,15 @@ class PostTemplate extends StatelessWidget {
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.all(18),
-      width: 300,
-      height: 300,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            text,
-            style: GoogleFonts.ubuntu(
-              color: Colors.black87,
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          Expanded(child: const SizedBox(height: 18)),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                "@ertai_en",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Expanded(child: SizedBox()),
-              Visibility(
-                visible: isNotLastText,
-                child: Icon(
-                  FontAwesomeIcons.circleArrowRight,
-                  size: 24,
-                  color: Colors.greenAccent,
-                ),
-              ),
-            ],
-          ),
-        ],
+      width: 350,
+      height: 350,
+      child: Text(
+        text,
+        style: GoogleFonts.ubuntu(
+          color: Colors.black87,
+          fontSize: 18,
+          fontWeight: FontWeight.w400,
+        ),
       ),
     );
   }

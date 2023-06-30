@@ -8,7 +8,8 @@ class ScreenshotService {
 
   Future<List<Uint8List>> getBytesFromWidgets(List<Widget> widgets) async {
     final tasks = widgets
-        .map((widget) async => await _screenshot.captureFromWidget(widget))
+        .map((widget) async =>
+            await _screenshot.captureFromWidget(widget, pixelRatio: 5))
         .toList();
 
     return Future.wait(tasks);

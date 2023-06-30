@@ -17,6 +17,11 @@ class CreatorApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.ubuntuTextTheme(),
         useMaterial3: true,
+        pageTransitionsTheme: PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+          },
+        ),
         appBarTheme: AppBarTheme(
           elevation: 0,
           backgroundColor: Colors.white,

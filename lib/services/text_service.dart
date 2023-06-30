@@ -1,9 +1,11 @@
+import 'package:insta_post_maker/main.dart';
+
 abstract class TextService {
   List<String> getPages(String text);
 }
 
 class TextServiceImpl implements TextService {
-  final limit = 400;
+  final limit = 420;
 
   @override
   List<String> getPages(String text) {
@@ -11,15 +13,20 @@ class TextServiceImpl implements TextService {
 
     return List.generate(
       pageCount,
-      (idx) => getTextExcerpt(idx, text),
+      (idx) => getTextExcerpt(idx, text, pageCount),
     ).toList();
   }
 
-  String getTextExcerpt(int idx, String text) {
-    if (text.length < limit) {
-      return text;
+  String getTextExcerpt(int idx, String text, int pageCount) {
+    final start = idx * limit;
+    final end = limit;
+
+    logger.w(start);
+
+    if (idx + 1 == pageCount) {
+      return text.substring(start, null);
     }
 
-    return text.substring(idx, limit);
+    return text.substring(start, end);
   }
 }
